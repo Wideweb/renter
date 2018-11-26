@@ -6,7 +6,7 @@ import axios from 'axios';
 import axiosMiddleware from 'redux-axios-middleware';
 import AppNavigator from './navigation/AppNavigator';
 
-import reducer from './modules/apartment/reducers';
+import reducer from './modules/app/reducer';
 
 const client = axios.create({
 	baseURL: 'https://ak.api.onliner.by/search/apartments?currency=usd&bounds%5Blb%5D%5Blat%5D=53.77793497204605&bounds%5Blb%5D%5Blong%5D=27.38754272460938&bounds%5Brt%5D%5Blat%5D=54.0239066230473&bounds%5Brt%5D%5Blong%5D=27.73086547851563&page=1&_=0.9482241707756398',

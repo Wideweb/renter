@@ -1,8 +1,7 @@
-import { combineReducers } from 'redux'
-import apartments from './apartments'
-import searchSettings from './search-settings'
+import apartments from './apartments';
+import searchSettings from './search-settings';
 
-export default combineReducers({
+export default {
 	apartments,
 	searchSettings
-})
+};
