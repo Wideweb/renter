@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "605053064888",
+    "firebase_url": "https://renter-minsk.firebaseio.com",
+    "project_id": "renter-minsk",
+    "storage_bucket": "renter-minsk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:605053064888:android:132b0cd0263d5f35",
+        "android_client_info": {
+          "package_name": "com.alckevich.renter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "605053064888-peh8ea5g4eo6b81hu7r6t42uvsdva3gh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAp3BttYB6gnTVb4b5wTI-moN1UZ6v_pM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
