@@ -2,9 +2,28 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
-import TabBarIcon from '../components/TabBarIcon';
-import SearchSettingsScreen from '../modules/apartment/containers/SearchSettingsScreen';
-import SearchResultsScreen from '../modules/apartment/containers/SearchResultsScreen';
+import TabBarIcon from '../../common/components/TabBarIcon';
+import SearchSettingsScreen from '../../apartment/containers/search-settings.screen';
+import SearchResultsScreen from '../../apartment/containers/search-results.screen';
+import SignInScreen from '../../auth/containers/sign-in.container';
+
+const SignInStack = createStackNavigator({
+	SignIn: SignInScreen,
+});
+
+SignInStack.navigationOptions = {
+	tabBarLabel: 'Sign in',
+	tabBarIcon: ({ focused }) => (
+		<TabBarIcon
+			focused={focused}
+			name={
+				Platform.OS === 'ios'
+					? `ios-log-in`
+					: 'md-log-in'
+			}
+		/>
+	),
+};
 
 const SearchSettingsStack = createStackNavigator({
 	Settings: SearchSettingsScreen,
@@ -39,6 +58,7 @@ SearchResultsStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
+    SignInStack,
 	SearchSettingsStack,
 	SearchResultsStack,
 });

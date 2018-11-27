@@ -35,12 +35,7 @@ export default async function registerForPushNotificationsAsync() {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            token: {
-                value: token,
-            },
-            user: {
-                username: 'Brent',
-            },
+            token
         }),
     });
 }
