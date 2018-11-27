@@ -64,7 +64,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getApartments: () => dispatch(getApartments())
+        getApartments: (settings) => dispatch(getApartments(settings))
     };
 };
 

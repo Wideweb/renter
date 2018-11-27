@@ -5,39 +5,42 @@ export const GET_APARTMENTS_SUCCESS = 'renter/apartments/LOAD_SUCCESS';
 export const GET_APARTMENTS_FAIL = 'renter/apartments/LOAD_FAIL';
 
 export const initState = {
-    isLoading: false,
-    isFail: false,
-    error: null,
-    list: [],
+	isLoading: false,
+	isFail: false,
+	error: null,
+	list: [],
 }
 
 export default function reducer(state = initState, action) {
-    switch (action.type) {
-        case GET_APARTMENTS:
-            return { ...state, isLoading: true };
-        case GET_APARTMENTS_SUCCESS:
-            return {
-                ...state,
-                isLoading: false,
-                isFail: false,
-                list: action.payload.data.apartments
-            };
-        case GET_APARTMENTS_FAIL:
-            return {
-                ...state,
-                isLoading: false,
-                isFail: true,
-                error: JSON.stringify(action.payload)
-            };
-        default:
-            return state;
-    }
+	switch (action.type) {
+		case GET_APARTMENTS:
+			return { ...state, isLoading: true };
+		case GET_APARTMENTS_SUCCESS:
+			return {
+				...state,
+				isLoading: false,
+				isFail: false,
+				list: action.payload
+			};
+		case GET_APARTMENTS_FAIL:
+			return {
+				...state,
+				isLoading: false,
+				isFail: true,
+				error: JSON.stringify(action.payload)
+			};
+		default:
+			return state;
+	}
 }
 
 export const getApartments = (settings) => async dispatch => {
-    dispatch({ type: GET_APARTMENTS, payload: null });
+	dispatch({ type: GET_APARTMENTS, payload: null });
 
-    await getApartmentsAsync(settings.priceMin, settings.priceMax, settings.rentType)
-        .then(apartments => dispatch({ type: GET_APARTMENTS_SUCCESS, payload: apartments }))
-        .catch(error => dispatch({ type: GET_APARTMENTS_FAIL, payload: error }));
+	try {
+		const apartments = await getApartmentsAsync(settings.priceMin, settings.priceMax, settings.rentType)
+		dispatch({ type: GET_APARTMENTS_SUCCESS, payload: apartments })
+	} catch (error) {
+		dispatch({ type: GET_APARTMENTS_FAIL, payload: error })
+	}
 }

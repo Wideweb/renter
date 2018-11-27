@@ -17,3 +17,11 @@ export async function signInWithGoogleAsync() {
         return { error: true };
     }
 }
+
+async function getUserInfoAsync(accessToken) {
+	let userInfoResponse = await fetch('https://www.googleapis.com/userinfo/v2/me', {
+	  headers: { Authorization: `Bearer ${accessToken}`},
+	});
+  
+	return userInfoResponse;
+  }
