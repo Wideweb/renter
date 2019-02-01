@@ -6,10 +6,15 @@ import { Notifications } from 'expo';
 import AppNavigator from './navigation/navigator';
 import registerForPushNotificationsAsync from '../common/infrastructure/push-notifications';
 import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga'
 
 import reducer from './reducer';
+import sagas from './sagas'
 
-const store = createStore(reducer, applyMiddleware(thunk));
+
+const sagaMiddleware = createSagaMiddleware()
+const store = createStore(reducer, applyMiddleware(thunk, sagaMiddleware));
+sagaMiddleware.run(sagas)
 
 export default class App extends React.Component {
     state = {

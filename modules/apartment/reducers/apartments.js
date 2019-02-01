@@ -37,7 +37,10 @@ export default function reducer(state = initState, action) {
 export const getApartments = (settings) => async dispatch => {
     dispatch({ type: GET_APARTMENTS, payload: null });
 
-    await getApartmentsAsync(settings.priceMin, settings.priceMax, settings.rentType)
-        .then(apartments => dispatch({ type: GET_APARTMENTS_SUCCESS, payload: apartments }))
-        .catch(error => dispatch({ type: GET_APARTMENTS_FAIL, payload: error }));
+    try {
+        const apartments = await getApartmentsAsync(settings.priceMin, settings.priceMax, settings.rentType);
+        dispatch({ type: GET_APARTMENTS_SUCCESS, payload: apartments });
+    } catch (error) {
+        dispatch({ type: GET_APARTMENTS_FAIL, payload: error });
+    }
 }
