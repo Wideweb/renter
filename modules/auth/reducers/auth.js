@@ -1,4 +1,4 @@
-import { BackAndroid } from 'react-native';
+import { BackHandler } from 'react-native';
 import { signInWithGoogleAsync } from '../services/oath';
 
 export const SIGN_IN = 'renter/auth/sign-in';
@@ -35,7 +35,7 @@ export const signInWithGoogle = () => async dispatch => {
     const result = await signInWithGoogleAsync();
 
     if (result.error || result.cancelled) {
-        BackAndroid.exitApp();
+        BackHandler.exitApp();
     }
 
     dispatch({ type: SIGN_IN_SUCCESS, payload: result.user });
