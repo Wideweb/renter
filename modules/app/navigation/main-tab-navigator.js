@@ -11,7 +11,7 @@ const RFDPTScreenStack = createStackNavigator({
 });
 
 RFDPTScreenStack.navigationOptions = {
-	tabBarLabel: 'Users',
+	tabBarLabel: 'PDT',
 	tabBarIcon: ({ focused }) => (
 		<TabBarIcon
 			focused={focused}

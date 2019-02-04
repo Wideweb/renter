@@ -34,11 +34,7 @@ const styles = StyleSheet.create({
 	}
 });
 
-class SignInScreen extends React.Component {
-	static navigationOptions = {
-		title: 'Sign in',
-	};
-
+class SignIn extends React.Component {
 	render() {
 		return (
 			<View style={styles.container}>
@@ -53,7 +49,7 @@ class SignInScreen extends React.Component {
 						buttonStyle={styles.signInBtn}
 						onPress={() => this.props.signInWithGoogle()}
 						title="Sign in with Google"
-						disabled={this.props.isSigninInProgress}
+						disabled={this.props.isLoading}
 					/>
 				</View>
 			</View>
@@ -63,7 +59,7 @@ class SignInScreen extends React.Component {
 
 function mapStateToProps(state) {
 	return {
-		isSigninInProgress: state.auth.isSigninInProgress
+		isLoading: state.auth.isLoading
 	};
 }
 
@@ -73,4 +69,4 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignInScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
