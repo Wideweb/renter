@@ -1,13 +1,12 @@
-import { BackHandler } from 'react-native';
-import { signInWithGoogleAsync } from '../services/oath';
-
 export const SIGN_IN = 'renter/auth/sign-in';
 export const SIGN_IN_SUCCESS = 'renter/auth/sign-in-success';
+export const SIGN_IN_FAIL = 'renter/auth/sign-in-fail';
 
 export const initState = {
     isSignedIn: false,
     isSigninInProgress: false,
-    info: {}
+    info: {},
+    error: null,
 }
 
 export default function reducer(state = initState, action) {
@@ -24,21 +23,19 @@ export default function reducer(state = initState, action) {
                 isSigninInProgress: false,
                 info: action.payload
             };
+        case SIGN_IN_FAIL:
+            return {
+                ...state,
+                isSignedIn: false,
+                isSigninInProgress: false,
+                info: null,
+                error: action.payload,
+            };
         default:
             return state;
     }
 }
 
 export const signInWithGoogle = () => async dispatch => {
-    dispatch({ type: SIGN_IN, payload: null });
-
-    const result = await signInWithGoogleAsync();
-
-    if (result.error || result.cancelled) {
-        BackHandler.exitApp();
-    }
-
-    dispatch({ type: SIGN_IN_SUCCESS, payload: result.user });
+    dispatch({ type: SIGN_IN });
 }
-
-

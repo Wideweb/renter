@@ -6,12 +6,12 @@ import createSagaMiddleware from 'redux-saga'
 import AppScreen from './containers/app.screen';
 
 import reducer from './reducer';
-import sagas from './sagas'
+import sagas from './sagas';
 
 
-const sagaMiddleware = createSagaMiddleware()
+const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducer, applyMiddleware(thunk, sagaMiddleware));
-sagaMiddleware.run(sagas)
+sagaMiddleware.run(sagas);
 
 export default class App extends React.Component {
 	//state = {

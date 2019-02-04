@@ -4,13 +4,11 @@ import { connect } from 'react-redux';
 import AppNavigator from '../navigation/navigator';
 import SignInScreen from '../../auth/containers/sign-in.container';
 
-//{this.props.isSignedIn ? <AppNavigator /> : <SignInScreen />}
-
 class AppScreen extends React.Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<AppNavigator />
+				{this.props.isSignedIn ? <AppNavigator /> : <SignInScreen />}
 			</View>
 		);
 	}

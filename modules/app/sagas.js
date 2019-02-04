@@ -1,7 +1,12 @@
-import appartmentSaga from '../apartment/sagas'
+import { all } from 'redux-saga/effects';
+import authSaga from '../auth/sagas';
+import tasksSaga from '../tasks/sagas';
+import usersSaga from '../users';
 
-export default function* rootSaga() {
+export default function* watch() {
     yield all([
-        appartmentSaga(),
+        authSaga(),
+        tasksSaga(),
+        usersSaga(),
     ])
 }

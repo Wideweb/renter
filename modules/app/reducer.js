@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux'
-import apartments from '../apartment/reducers'
-import auth from '../auth/reducers'
+import { combineReducers } from 'redux';
+import auth from '../auth/reducers';
+import tasks from '../tasks/reducers';
 
 export default combineReducers({
-	...apartments,
-	...auth
-})
+	...auth,
+	...tasks,
+});

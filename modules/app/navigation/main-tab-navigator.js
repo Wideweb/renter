@@ -3,33 +3,29 @@ import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../../common/components/TabBarIcon';
-import SearchSettingsScreen from '../../apartment/containers/search-settings.screen';
-import SearchResultsScreen from '../../apartment/containers/search-results.screen';
+import RFDPTScreen from '../../tasks/containers/ready-for-pdt.screen';
+import UsersScreen from '../../users/containers/user-list.screen';
 
-const SearchSettingsStack = createStackNavigator({
-	Settings: SearchSettingsScreen,
+const RFDPTScreenStack = createStackNavigator({
+	RFDPT: RFDPTScreen,
 });
 
-SearchSettingsStack.navigationOptions = {
-	tabBarLabel: 'Search Settings',
+RFDPTScreenStack.navigationOptions = {
+	tabBarLabel: 'Users',
 	tabBarIcon: ({ focused }) => (
 		<TabBarIcon
 			focused={focused}
-			name={
-				Platform.OS === 'ios'
-					? `ios-settings`
-					: 'md-settings'
-			}
+			name={Platform.OS === 'ios' ? 'ios-search' : 'md-search'}
 		/>
 	),
 };
 
-const SearchResultsStack = createStackNavigator({
-	SearchResults: SearchResultsScreen,
+const UsersScreenStack = createStackNavigator({
+	Users: UsersScreen,
 });
 
-SearchResultsStack.navigationOptions = {
-	tabBarLabel: 'Search Results',
+UsersScreenStack.navigationOptions = {
+	tabBarLabel: 'Users',
 	tabBarIcon: ({ focused }) => (
 		<TabBarIcon
 			focused={focused}
@@ -39,6 +35,6 @@ SearchResultsStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-	SearchSettingsStack,
-	SearchResultsStack,
+    RFDPTScreenStack,
+    UsersScreenStack,
 });
