@@ -9,11 +9,12 @@ import {
 import { connect } from 'react-redux';
 import { 
     getTasks,
-    asignTask,
+    assignTask,
+    unassignTask,
 } from '../reducers/tasks';
-import TaskListItem from '../components/task-list-item.component';
+import TaskListItem from './task-list-item.component';
 
-class ReadyForPDTScreen extends React.Component {
+class TasksList extends React.Component {
     static navigationOptions = {
         title: 'Ready For PDT',
     };
@@ -57,14 +58,18 @@ class ReadyForPDTScreen extends React.Component {
 
     _renderItem = ({ item }) => (
         <TaskListItem
-            onAsign={task => this.props.asignTask(task.id)}
+            onAssign={task => this.props.assignTask(task.id)}
+            onUnassign={task => this.props.unassignTask(task.id)}
             task={item}
+            owned={item.ownerId === this.props.user.id}
+            assigned={item.assigneeId === this.props.user.id}
         />
     );
 }
 
 const mapStateToProps = state => {
     return {
+        user: state.auth.info,
         tasks: state.tasks.list.sort((a, b) => b.createdAt - a.createdAt),
         searchSettings: state.searchSettings,
         isLoading: state.tasks.isLoading,
@@ -76,7 +81,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getTasks: () => dispatch(getTasks()),
-        asignTask: (id) => dispatch(asignTask(id)),
+        assignTask: (id) => dispatch(assignTask(id)),
+        unassignTask: (id) => dispatch(unassignTask(id)),
     };
 };
 

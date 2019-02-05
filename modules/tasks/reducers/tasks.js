@@ -2,9 +2,13 @@ export const GET_TASKS = 'renter/tasks/LOAD';
 export const GET_TASKS_SUCCESS = 'renter/tasks/LOAD_SUCCESS';
 export const GET_TASKS_FAIL = 'renter/tasks/LOAD_FAIL';
 
-export const ASIGN_TASK = 'renter/tasks/ASIGN';
-export const ASIGN_TASK_SUCCESS = 'renter/tasks/ASIGN_SUCCESS';
-export const ASIGN_TASK_FAIL = 'renter/tasks/ASIGN_FAIL';
+export const ASSIGN_TASK = 'renter/tasks/ASSIGN';
+export const ASSIGN_TASK_SUCCESS = 'renter/tasks/ASSIGN_SUCCESS';
+export const ASSIGN_TASK_FAIL = 'renter/tasks/ASSIGN_FAIL';
+
+export const UNASSIGN_TASK = 'renter/tasks/UNASSIGN';
+export const UNASSIGN_TASK_SUCCESS = 'renter/tasks/UNASSIGN_SUCCESS';
+export const UNASSIGN_TASK_FAIL = 'renter/tasks/UNASSIGN_FAIL';
 
 export const initState = {
     isLoading: false,
@@ -31,9 +35,9 @@ export default function reducer(state = initState, action) {
                 isFail: true,
                 error: JSON.stringify(action.payload),
             };
-        case ASIGN_TASK:
+        case ASSIGN_TASK:
             return { ...state, isLoading: true };
-        case ASIGN_TASK_SUCCESS:
+        case ASSIGN_TASK_SUCCESS:
             const index = state.list.findIndex(item => item.id === action.payload.id);
             const list = state.list.splice(index, 1);
             list.push(action.payload);
@@ -43,7 +47,26 @@ export default function reducer(state = initState, action) {
                 isFail: false,
                 list,
             };
-        case ASIGN_TASK_FAIL:
+        case ASSIGN_TASK_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                isFail: true,
+                error: JSON.stringify(action.payload),
+            };
+        case UNASSIGN_TASK:
+            return { ...state, isLoading: true };
+        case UNASSIGN_TASK_SUCCESS:
+            const index = state.list.findIndex(item => item.id === action.payload.id);
+            const list = state.list.splice(index, 1);
+            list.push(action.payload);
+            return {
+                ...state,
+                isLoading: false,
+                isFail: false,
+                list,
+            };
+        case UNASSIGN_TASK_FAIL:
             return {
                 ...state,
                 isLoading: false,
@@ -59,6 +82,10 @@ export const getTasks = () => async dispatch => {
     dispatch({ type: GET_TASKS });
 }
 
-export const asignTask = () => async dispatch => {
-    dispatch({ type: ASIGN_TASK });
+export const assignTask = () => async dispatch => {
+    dispatch({ type: ASSIGN_TASK });
+}
+
+export const unassignTask = () => async dispatch => {
+    dispatch({ type: UNASSIGN_TASK });
 }

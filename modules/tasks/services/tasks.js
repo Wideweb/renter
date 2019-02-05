@@ -5,13 +5,13 @@ const db = [
         id: 1,
         owner: { id: 1, name: 'Alex' },
         createdAt: new Date(2019, 2, 3).getTime(),
-        asignee: null,
+        assignee: null,
     },
     {
         id: 2,
         owner: { id: 2, name: 'Doe' },
         createdAt: new Date(2019, 2, 4).getTime(),
-        asignee: null,
+        assignee: null,
     }
 ]
 
@@ -19,8 +19,14 @@ export function getTasksAsync() {
     return new Promise(db.map(item => new Task(item)));
 }
 
-export function asignTaskAsync({ payload: id }) {
+export function assignTaskAsync({ payload: id }) {
     const task = db.find(item => item.id === id);
-    task.asignee = { name: 'you' };
+    task.assignee = { name: 'you' };
+    return Promise(task);
+}
+
+export function unassignTaskAsync({ payload: id }) {
+    const task = db.find(item => item.id === id);
+    task.assignee = null;
     return Promise(task);
 }
